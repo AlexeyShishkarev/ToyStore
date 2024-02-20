@@ -1,6 +1,8 @@
 package model.store;
 
-public class Goods {
+import java.io.Serializable;
+
+public class Goods implements Serializable {
     private int id;
     private String name;
     private int significance;

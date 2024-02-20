@@ -18,7 +18,9 @@ public class Toys extends Goods{
 
     @Override
     public String toString() {
-        return super.toString() + "Цена: " + price + "\n" + "Значимость: " + getSignificance() + "\n";
+        return super.toString() + "Цена: " + price + " р." + "\n"
+                + "Количество: " + quantity + "\n"
+                + "Значимость: " + getSignificance() + "\n";
     }
 
     public int getQuantity() {
@@ -28,6 +30,8 @@ public class Toys extends Goods{
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+
 
 
 }
