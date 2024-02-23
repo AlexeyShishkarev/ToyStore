@@ -1,8 +1,6 @@
 package view;
 
-import view.commands.AddNewToy;
-import view.commands.Commands;
-import view.commands.ShowAllToys;
+import view.commands.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +13,10 @@ public class Menu {
         commandsList = new ArrayList<>();
         commandsList.add(new ShowAllToys(consoleIO));
         commandsList.add(new AddNewToy(consoleIO));
+        commandsList.add(new FindToy(consoleIO));
+        commandsList.add(new Save(consoleIO));
+        commandsList.add(new Load(consoleIO));
+        commandsList.add(new Finish(consoleIO));
     }
 
     public int menuSize(){

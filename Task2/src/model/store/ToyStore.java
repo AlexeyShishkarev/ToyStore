@@ -1,9 +1,10 @@
 package model.store;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToyStore {
+public class ToyStore implements Serializable {
     private List<Goods> listToys;
 
     public ToyStore(List<Goods> listToys){
