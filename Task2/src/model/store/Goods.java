@@ -2,7 +2,7 @@ package model.store;
 
 import java.io.Serializable;
 
-public class Goods implements Serializable {
+public abstract class Goods implements Serializable, ToyItem{
     private int id;
     private String name;
     private int significance;
@@ -30,5 +30,13 @@ public class Goods implements Serializable {
 
     public int getSignificance() {
         return significance;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSignificance(int significance) {
+        this.significance = significance;
     }
 }

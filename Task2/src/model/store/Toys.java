@@ -1,6 +1,8 @@
 package model.store;
 
-public class Toys extends Goods{
+import java.io.Serializable;
+
+public class Toys extends Goods implements Serializable {
 
     private double price;
     private int quantity;
@@ -11,6 +13,8 @@ public class Toys extends Goods{
         this.price = price;
         this.quantity = quantity;
     }
+
+
 
     public double getPrice() {
         return price;
@@ -30,6 +34,8 @@ public class Toys extends Goods{
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+
 
 
 

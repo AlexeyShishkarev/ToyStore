@@ -1,5 +1,7 @@
 package model.store;
 
+import model.store.prize.PrizeDraw;
+
 import java.io.*;
 import java.util.List;
 

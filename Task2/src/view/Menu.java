@@ -16,6 +16,12 @@ public class Menu {
         commandsList.add(new FindToy(consoleIO));
         commandsList.add(new Save(consoleIO));
         commandsList.add(new Load(consoleIO));
+        commandsList.add(new ChangeName(consoleIO));
+        commandsList.add(new ChangeSignificance(consoleIO));
+        commandsList.add(new HoldADraw(consoleIO));
+        commandsList.add(new ShowAllPrize(consoleIO));
+        commandsList.add(new SavePrize(consoleIO));
+        commandsList.add(new LoadPrize(consoleIO));
         commandsList.add(new Finish(consoleIO));
     }
 

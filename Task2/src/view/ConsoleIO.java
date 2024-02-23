@@ -59,8 +59,6 @@ public class ConsoleIO implements View{
 
     /**
      * Проверка является ли введенное значение числом
-     * @param num
-     * @return
      */
     public boolean isNumeric(String num){
         int number;
@@ -109,7 +107,6 @@ public class ConsoleIO implements View{
                 number = Integer.parseInt(str);
                 return number;
             }
-            printAnswer("Вы ввели не число!!!");
         }
 
     }
@@ -125,8 +122,8 @@ public class ConsoleIO implements View{
     public void addNewToy(){
         String name = consoleInput("Введите название игрушки: ");
         double price = inputNumberDouble("Введите цену игрушки: ");
-        int significance = inputNumberInt("Введите значимость для розыгрыша (от 1 - самый расспространненый до " +
-                "3 - самый редкий): ");
+        int significance = inputNumberInt("Введите значимость для розыгрыша (от 1 - самый редкий до " +
+                "3 - самый частый): ");
         int quantity = inputNumberInt("Введите количество игрушек: ");
 
         presenter.addNewToy(name, significance, price, quantity);
@@ -155,6 +152,7 @@ public class ConsoleIO implements View{
         File[] files = folder.listFiles();
         while (true){
             String path = consoleInput("Введите название сохраненного файла: ");
+            assert files != null;
             for (File file : files){
                 if (file.getName().equals(path)){
                     return path;
@@ -167,8 +165,88 @@ public class ConsoleIO implements View{
 
 
     public void load() {
-        presenter.showAllSavedFiles();
-        String fileName = isCorrectPath();
-        presenter.load(fileName);
+        if(presenter.showAllSavedFiles()){
+            String fileName = isCorrectPath();
+            presenter.load(fileName);
         }
     }
+
+    public void changeName(){
+        presenter.findToy(isCorrectName());
+        int choice = isCorrectId();
+        String name = consoleInput("Введите новое имя: ");
+        presenter.changeName(choice, name);
+
+    }
+
+
+    /**
+     * Проверка корректности введенного веса для розыгрыша
+     */
+    private int isCorrectSignificance(){
+        while (true){
+            int significance = inputNumberInt("Введите новое значение: ");
+            if (significance > 0 && significance < 4){
+                return significance;
+            } else {
+                printAnswer("Значение должно быть от 1 - самый расспространненый до \" +\n" +
+                        "\"3 - самый редкий) ");
+            }
+        }
+    }
+
+    public void changeSignificance(){
+        presenter.findToy(isCorrectName());
+        int choice = isCorrectId();
+        int significance = isCorrectSignificance();
+        presenter.changeSignificance(choice, significance);
+    }
+
+    /**
+     * Проверка, что введнный id есть в списке игрушек
+     */
+    private int isCorrectId(){
+
+        while (true){
+            int choice = inputNumberInt("Введите id для изменения: ");
+            if (presenter.isCorrectId(choice)){
+                return choice;
+            }
+        }
+
+    }
+
+    public void savePrize(){
+        presenter.savePrize(consoleInput("Введите имя файла для сохранения результатов розыгрыша: ") + ".txt");
+    }
+
+
+
+    /**
+     * Проверка, что товар с таким именем и правда существует.
+     */
+    private String isCorrectName(){
+        while (true){
+            String name = consoleInput("Введите название для поиска: ");
+            if (presenter.containsToy(name)){
+                return name;
+            }
+        }
+    }
+
+    public void holdADraw(){
+        presenter.holdADraw();
+    }
+
+    public void showAllPrize(){
+        presenter.showAllPrize();
+    }
+
+    public void loadPrize() {
+        if(presenter.showAllSavedFiles()){
+            String fileName = isCorrectPath();
+            presenter.loadPrize(fileName);
+        }
+    }
+
+}
