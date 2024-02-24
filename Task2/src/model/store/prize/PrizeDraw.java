@@ -1,6 +1,7 @@
 package model.store.prize;
 
 import model.store.Goods;
+import model.store.ToyStore;
 import model.store.Toys;
 
 import java.io.Serializable;
@@ -27,24 +28,18 @@ public class PrizeDraw implements Serializable {
     private Integer setSignificance(int start, int end){
 
         int number = new Random().nextInt(start, end);
-        if (number == 1){
-            for (Goods goods : goodsList){
-                if (quantityNull(goods)){
-                    setSignificance(2,8);
-                }
-            }
+        if (number == 1) {
             return 1;
-        } if (number > 1 && number < 4){
-            for (Goods goods : goodsList){
-                if (quantityNull(goods)){
-                    setSignificance(4,8);
-                }
-            }
+        }
+         if (number > 1 && number < 4){
+
             return 2;
         } else {
             return 3;
+            }
+            
         }
-    }
+    
 
     /**
      * Проверяем есть ли игрушки для розыгыша
@@ -62,8 +57,25 @@ public class PrizeDraw implements Serializable {
      * проверяем можем ли мы выдать конкретную игрушку
      */
     private boolean areAvailableToy(){
+        int start = 1;
+        int end = 8;
 
-        significance = setSignificance(1, 8);
+        for(Goods goods : goodsList){
+            if (goods.getSignificance() == 3){
+                if (!quantityNull(goods)){
+                    end = 4;
+                }
+            } else if (goods.getSignificance() == 1){
+                if (!quantityNull(goods)){
+                    start = 2;
+                }
+            }
+
+        }
+
+
+        significance = setSignificance(start, end);
+
 
         for (Goods toys : goodsList){
             if (toys.getSignificance() == significance){
@@ -96,7 +108,6 @@ public class PrizeDraw implements Serializable {
                         getToysOfSignificance().getPrice(),
                         1
                         );
-
                 if(prizeList.isEmpty()){
                     prizeList.add(toys);
                     getToysOfSignificance().setQuantity(getToysOfSignificance().getQuantity() - 1);
@@ -124,7 +135,7 @@ public class PrizeDraw implements Serializable {
 
 
     private boolean quantityNull (Goods toys){
-        return toys.getQuantity() > 0;
+        return toys.getQuantity() != 0;
     }
 
     public String getPrizeList() {
@@ -136,9 +147,13 @@ public class PrizeDraw implements Serializable {
         return stringBuilder.toString();
     }
 
-    public List<Goods> retPrizeList(){
-        return prizeList;
-    }
+//    public List<Goods> retPrizeList(){
+//        return prizeList;
+//    }
+//
+//    public void setPrizeList(List<Goods> prizeList){
+//        this.prizeList = prizeList;
+//    }
 
 
 }

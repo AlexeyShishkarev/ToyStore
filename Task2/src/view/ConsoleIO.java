@@ -142,7 +142,7 @@ public class ConsoleIO implements View{
     }
 
     public void save(){
-        String fileName = consoleInput("Введите имя файла: ") + ".txt";
+        String fileName = consoleInput("Введите имя файла: ") + ".mg";
         presenter.save(fileName);
     }
 
@@ -159,13 +159,13 @@ public class ConsoleIO implements View{
                 }
             }
             printAnswer("Название файла введено неверно!");
-            presenter.showAllSavedFiles();
+//            presenter.showAllSavedFiles();
         }
     }
 
 
     public void load() {
-        if(presenter.showAllSavedFiles()){
+        if(presenter.showAllSavedFiles("mg")){
             String fileName = isCorrectPath();
             presenter.load(fileName);
         }
@@ -217,7 +217,7 @@ public class ConsoleIO implements View{
     }
 
     public void savePrize(){
-        presenter.savePrize(consoleInput("Введите имя файла для сохранения результатов розыгрыша: ") + ".txt");
+        presenter.savePrize(consoleInput("Введите имя файла для сохранения результатов розыгрыша: ") + ".pr");
     }
 
 
@@ -243,7 +243,7 @@ public class ConsoleIO implements View{
     }
 
     public void loadPrize() {
-        if(presenter.showAllSavedFiles()){
+        if(presenter.showAllSavedFiles("pr")){
             String fileName = isCorrectPath();
             presenter.loadPrize(fileName);
         }

@@ -67,14 +67,14 @@ public class Service {
         return true;
     }
 
-    public String showAllSavedFiles(){
-        return toyStoreSaveLoad.showAllSavedFiles();
+    public String showAllSavedFiles(String expansion){
+        return toyStoreSaveLoad.showAllSavedFiles(expansion);
     }
 
     public boolean load(String path) {
         toyStore = (ToyStore) toyStoreSaveLoad.load(path);
         idToy = idLoad();
-        prizeDraw =new PrizeDraw(toyStore.getListToys());
+//        prizeDraw =new PrizeDraw(toyStore.getListToys());
 
         return true;
     }
@@ -82,13 +82,16 @@ public class Service {
     /**
      * Возвращение максимального id
      */
-    private int idLoad(){
-        List<Goods> goodsList = toyStore.getListToys();
-        List<Integer> idList = new ArrayList<>();
-        for (Goods goods : goodsList){
-            idList.add(goods.getId());
+    private Integer idLoad(){
+        if (toyStore != null){
+            List<Goods> goodsList = toyStore.getListToys();
+            List<Integer> idList = new ArrayList<>();
+            for (Goods goods : goodsList){
+                idList.add(goods.getId());
+            }
+            return Collections.max(idList) + 1;
         }
-        return Collections.max(idList) + 1;
+        return null;
     }
 
     public boolean isCorrectId(int choice){
@@ -141,8 +144,9 @@ public class Service {
     }
 
     public boolean loadPrize(String fileName) {
+//        prizeDraw = new PrizeDraw(prizeDraw.retPrizeList());
         prizeDraw = (PrizeDraw) loadPrize.load(fileName);
-        prizeDraw = new PrizeDraw(prizeDraw.retPrizeList());
+
 
         return true;
     }

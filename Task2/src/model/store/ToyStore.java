@@ -22,4 +22,6 @@ public class ToyStore implements Serializable {
     public List<Goods> getListToys() {
         return listToys;
     }
+
+
 }

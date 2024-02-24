@@ -55,13 +55,13 @@ public class Presenter {
         }
     }
 
-    public boolean showAllSavedFiles(){
-        if (service.showAllSavedFiles() == null){
+    public boolean showAllSavedFiles(String expansion){
+        if (service.showAllSavedFiles(expansion) == null){
             view.printAnswer("Нет сохраненных файлов!");
             return false;
 
         } else {
-            view.printAnswer(service.showAllSavedFiles());
+            view.printAnswer(service.showAllSavedFiles(expansion));
             return true;
         }
 

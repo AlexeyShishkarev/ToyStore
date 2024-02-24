@@ -25,13 +25,13 @@ public class ToyStoreSaveLoad implements Writable {
      * сохраненных файлов программы
      * @return
      */
-    public String showAllSavedFiles(){
+    public String showAllSavedFiles(String expansion){
         StringBuilder stringBuilder = new StringBuilder();
         String path = new File("").getAbsolutePath();
         File folder = new File(path);
         File[] files = folder.listFiles();
         for (File file : files){
-            if (file.getName().toLowerCase().contains("txt")){
+            if (file.getName().toLowerCase().contains(expansion)){
                 if (stringBuilder.isEmpty()){
                     stringBuilder.append("Список сохранненых файлов: ").append("\n");
                 }
@@ -58,6 +58,10 @@ public class ToyStoreSaveLoad implements Writable {
         } catch (FileNotFoundException e) {
             return null;
         } catch (IOException | ClassNotFoundException e) {
+            return null;
+        } catch (ClassCastException e) {
+            return null;
+        } catch (NullPointerException e){
             return null;
         }
     }
