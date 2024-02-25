@@ -74,7 +74,7 @@ public class Service {
     public boolean load(String path) {
         toyStore = (ToyStore) toyStoreSaveLoad.load(path);
         idToy = idLoad();
-//        prizeDraw =new PrizeDraw(toyStore.getListToys());
+        prizeDraw =new PrizeDraw(toyStore.getListToys());
 
         return true;
     }
